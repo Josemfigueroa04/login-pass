@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import Login from './componentes/login/Login'
+import Alert from './componentes/alert/Alert'
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+
+  const [alertMessage, setAlertMessage] = useState('')
+  const [alertType, setAlertType] = useState('')
+
+  const validLogin = (values) => {
+    
+    const validEmail = "josemfigueroa04@gmail.com"
+    const validPassword = "123456"
+    if(values.email === validEmail && values.password === validPassword){
+      setAlertMessage("Login successful")
+      setAlertType("success")
+    }else{
+      setAlertMessage("Login failed")
+      setAlertType("danger")
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className= "container">
+      <Alert message={alertMessage} type={alertType}/>
+      <Login onSubmit={validLogin}/>
+      
     </div>
   );
 }
